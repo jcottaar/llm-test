@@ -9,7 +9,7 @@ def load_model(model_id: str = "Qwen/Qwen2.5-0.5B-Instruct"):
         model_id,
         torch_dtype=torch.float32,
     )
-    device = "mps" if torch.backends.mps.is_available() else "cpu"
+    device = "mps" if torch.backends.mps.is_available() else ("cuda" if torch.cuda.is_available() else "cpu")
     model = model.to(device)
     print(f"Model loaded on: {device}")
     return tokenizer, model
